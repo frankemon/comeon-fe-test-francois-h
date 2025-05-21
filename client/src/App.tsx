@@ -1,0 +1,10 @@
+import './App.css'
+import Login from './components/auth/Login'
+
+const App = () => {
+  return (
+    <Login />
+  )
+}
+
+export default App

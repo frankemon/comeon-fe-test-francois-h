@@ -1,6 +1,20 @@
 import { Button, Card, CardContent, TextField } from "@mui/material"
+import { login } from "../../services/login"
 
 const Login = () => {
+
+
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault()
+        const formData = new FormData(event.currentTarget)
+        console.log("formData", formData)
+        const username = formData.get("username") as string
+        const password = formData.get("password") as string
+
+        const response = await login(username, password)
+        console.log("login response", response)
+    }
+
     return (
         <Card>
             <CardContent className="flex flex-col gap-4">
@@ -9,11 +23,11 @@ const Login = () => {
                     <p>Login to access your casino account and start winning</p>
                 </div>
                 <form
-                    onSubmit={() => { }}
+                    onSubmit={handleSubmit}
                     className="flex flex-col gap-4 mt-4"
                 >
-                    <TextField label="Username" variant="outlined" type="email" fullWidth />
-                    <TextField label="Password" variant="outlined" type="password" fullWidth />
+                    <TextField name="username" label="Username" variant="outlined" type="text" fullWidth />
+                    <TextField name="password" label="Password" variant="outlined" type="password" fullWidth />
                     <div className="flex justify-center">
                         <Button variant="contained" color="primary" type="submit">
                             Login

@@ -1,12 +1,8 @@
 import { Card, CardContent } from '@mui/material'
+import { Game } from '../../types/Game'
 
 interface GameCardProps {
-    game: {
-        id: number;
-        name: string;
-        image: string;
-        description: string;
-    }
+    game: Game
 }
 
 // TODO: img same height on all cards, add mouseover effect: add overlay, show button, zoom image, shift card up
@@ -16,7 +12,7 @@ const GameCard = (args: GameCardProps) => {
         <Card
             className=""
         >
-            <img src={game.image} alt={game.name} />
+            <img src={game.icon} alt={game.name} />
             <CardContent>
                 <p>{game.name}</p>
                 <p>{game.description}</p>

@@ -30,7 +30,7 @@ const Login = () => {
 
     useEffect(() => {
         // Clear input fields on mount
-        // Proper way is state controlled inputs
+        // TODO: Proper way is state controlled inputs
         if (usernameRef.current) usernameRef.current.value = ""
         if (passwordRef.current) passwordRef.current.value = ""
     }, [])

@@ -1,5 +1,6 @@
 import { InputBase } from "@mui/material"
 // import SearchIcon from '@material-ui/icons/Search';
+import useSearch from "../../hooks/useSearch"
 
 const Search = () => {
     return (

@@ -1,3 +1,4 @@
+// TODO: add type for these
 export const get = async () => {
     try {
         const response = await fetch("http://localhost:3001/categories");

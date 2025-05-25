@@ -5,4 +5,5 @@ export interface AuthContext {
     isAuthenticated: boolean;
     login: (player: Player) => void;
     logout: () => void;
+    loading: boolean;
 }

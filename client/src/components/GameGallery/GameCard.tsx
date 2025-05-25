@@ -23,7 +23,7 @@ const GameCard = (args: GameCardProps) => {
                 </div>
                 <div>
                     <p>{game.name}</p>
-                    <p>{game.description}</p>
+                    {/* <p>{game.description}</p> */}
                 </div>
                 <div className='flex items-center justify-center'>
                     <Button

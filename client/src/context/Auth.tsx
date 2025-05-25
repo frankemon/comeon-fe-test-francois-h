@@ -14,6 +14,7 @@ interface AuthProviderProps {
 const AuthContext = createContext<IAuthContext | undefined>(undefined)
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
+    const [loading, setLoading] = useState<boolean>(true)
     const [player, setPlayer] = useState<Player | null>(null)
     const [isAuthenticated, setIsAthenticated] = useState<boolean>(false)
 
@@ -24,8 +25,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             const parsedPlayer = JSON.parse(player)
             setPlayer(parsedPlayer)
             setIsAthenticated(true)
-            console.log("Player found in localStorage:", parsedPlayer)
         }
+        setLoading(false)
     }, [])
 
     // Store player in localStorage
@@ -49,7 +50,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 
     return (
         // Gives access to data and functions
-        <AuthContext.Provider value={{ player, isAuthenticated, login, logout }}>
+        <AuthContext.Provider value={{ player, isAuthenticated, login, logout, loading }}>
             {children}
         </AuthContext.Provider>
     )

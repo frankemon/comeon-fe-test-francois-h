@@ -2,16 +2,6 @@ import { Button } from "@mui/material"
 import { useEffect, useRef } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 
-declare global {
-    interface Window {
-        comeon: {
-            game: {
-                launch: (code: string) => void;
-            };
-        };
-    }
-}
-
 const Game = () => {
     const navigate = useNavigate()
     const params = useParams()

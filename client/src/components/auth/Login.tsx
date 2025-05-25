@@ -1,5 +1,5 @@
 import { Button, Card, CardContent, TextField } from "@mui/material"
-import { login } from "../../services/login"
+import { login } from "../../services/auth"
 
 const Login = () => {
 

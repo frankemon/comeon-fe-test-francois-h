@@ -24,6 +24,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
             const parsedPlayer = JSON.parse(player)
             setPlayer(parsedPlayer)
             setIsAthenticated(true)
+            console.log("Player found in localStorage:", parsedPlayer)
         }
     }, [])
 

@@ -5,6 +5,7 @@ import Layout from './components/common/Layout'
 import Auth from './pages/Auth'
 import Games from './pages/Games'
 import NotFound from './pages/NotFound'
+import Game from './pages/Game'
 import './App.css'
 
 
@@ -21,6 +22,11 @@ const App = () => {
             <Route path="/games" element={
               <ProtectedRoute>
                 <Games />
+              </ProtectedRoute>
+            } />
+            <Route path="/games/:id" element={
+              <ProtectedRoute>
+                <Game />
               </ProtectedRoute>
             } />
 

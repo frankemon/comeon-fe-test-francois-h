@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
+import Loader from '../components/common/Loader'
+import { Gallery } from '../components/GameGallery/Gallery'
+import Categories from '../components/common/Categories'
 
-type Props = {}
-
-const Games = (props: Props) => {
+const Games = () => {
     return (
-        <div>All games in gallery</div>
+        <>
+            <Categories />
+            <Gallery />
+        </>
     )
 }
 

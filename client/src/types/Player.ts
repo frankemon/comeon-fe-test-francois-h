@@ -3,4 +3,6 @@ export interface Player {
     avatar: string;
     event: string;
     password: string;
+    // Added in login process because it isn't in response
+    username?: string;
 }

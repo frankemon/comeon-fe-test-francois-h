@@ -3,16 +3,21 @@ import Card from "./GameCard"
 import { get as fetchGames } from "../../services/games"
 import { get as fetchCategories } from '../../services/categories'
 import { Game } from "../../types/Game"
+import Loader from '../common/Loader'
+import NoGames from './NoGames'
 
 export const Gallery = () => {
+    const [loading, setLoading] = useState<boolean>(false)
     const [games, setGames] = useState<Game[]>([])
 
     const getGames = async () => {
+        setLoading(true)
         const response = await fetchGames()
         if (response) {
             setGames(response)
         }
         console.log("games response:", response)
+        setLoading(false)
     }
 
     const getCategories = async () => {
@@ -28,15 +33,22 @@ export const Gallery = () => {
     }, [])
 
     return (
-        <div>
-            <h1>Available Games</h1>
-            <div className="grid grid-cols-3 gap-4">
-                {games.map((game, index) => {
-                    return (
-                        <Card key={index} game={game} />
-                    )
-                })}
-            </div>
-        </div>
+        <>
+            {loading && <Loader />}
+            {
+                !loading && games.length === 0 &&
+                <NoGames />
+            }
+            {
+                !loading && games.length > 0 &&
+                <div className="flex flex-col gap-4">
+                    {games.map((game, index) => {
+                        return (
+                            <Card key={index} game={game} />
+                        )
+                    })}
+                </div>
+            }
+        </>
     )
 }

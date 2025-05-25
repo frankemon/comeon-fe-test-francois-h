@@ -1,8 +1,4 @@
-import React from 'react'
-
-type Props = {}
-
-const Game = (props: Props) => {
+const Game = () => {
     return (
         <div>Single clicked game</div>
     )

@@ -1,20 +1,23 @@
-import { AppBar, Button } from '@mui/material'
-import { logout } from '../../services/auth'
+import { AppBar, Avatar, Button } from '@mui/material'
+import { logout as logoutService } from '../../services/auth'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../context/Auth'
+import Profile from '../Profile/Profile'
+import Search from './Search'
 
-interface NavbarProps {
-    isLoggedIn?: boolean
-}
+//  Use isLoggedIn ?
 
-const Navbar = ({ isLoggedIn }: NavbarProps) => {
+const Navbar = () => {
+    const { player, logout } = useAuth()
+    console.log('Navbar player:', player)
     const navigate = useNavigate()
 
     const handleClick = async () => {
-        if (isLoggedIn) {
-            await logout("username")
-        } else {
-            navigate('/')
+        if (player) {
+            await logoutService(player?.username || '')
+            logout()
         }
+        navigate('/')
     }
 
     return (
@@ -23,12 +26,25 @@ const Navbar = ({ isLoggedIn }: NavbarProps) => {
             className="border-b"
             sx={{ backgroundColor: 'var(--color-primary)' }}>
             <div className="flex items-center justify-between h-16 mx-4">
-                <h1 className="text-white text-2xl">ComeonCasino</h1>
-                <Button
-                    onClick={handleClick}
-                    variant="contained" color="primary">
-                    {isLoggedIn ? 'Logout' : 'Login'}
-                </Button>
+                <img src="/images/logo.svg" alt="Comeon Group" title="Comeon Group" width="250" />
+                {
+                    player && (
+                        <Search />
+                    )
+                }
+
+                <div className="flex items-center gap-4">
+                    {player && (
+                        <Profile />
+                    )}
+                    <Button
+                        onClick={handleClick}
+                        variant="contained" color="primary">
+                        {player ? 'Logout' : 'Login'}
+                    </Button>
+                </div>
+
+
             </div>
 
         </AppBar>

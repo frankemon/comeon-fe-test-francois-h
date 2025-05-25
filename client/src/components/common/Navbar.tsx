@@ -1,17 +1,19 @@
 import { AppBar, Button } from '@mui/material'
-import { logout } from '../services/auth'
+import { logout } from '../../services/auth'
+import { useNavigate } from 'react-router-dom'
 
 interface NavbarProps {
     isLoggedIn?: boolean
 }
 
 const Navbar = ({ isLoggedIn }: NavbarProps) => {
+    const navigate = useNavigate()
 
     const handleClick = async () => {
         if (isLoggedIn) {
             await logout("username")
         } else {
-            // redirect to login page with react-router
+            navigate('/')
         }
     }
 

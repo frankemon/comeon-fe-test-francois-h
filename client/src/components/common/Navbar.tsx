@@ -26,7 +26,9 @@ const Navbar = () => {
             className="border-b"
             sx={{ backgroundColor: 'var(--color-primary)' }}>
             <div className="flex items-center justify-between h-16 mx-4">
-                <img src="/images/logo.svg" alt="Comeon Group" title="Comeon Group" width="250" />
+                <div className='cursor-pointer' onClick={() => navigate('/games')}>
+                    <img src="/images/logo.svg" alt="Comeon Group" title="Comeon Group" width="250" />
+                </div>
                 {
                     player && (
                         <Search />

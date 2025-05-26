@@ -1,18 +1,17 @@
 import { Button } from "@mui/material"
 import { useEffect, useRef } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useLocation, useNavigate, useParams } from "react-router-dom"
 
 const Game = () => {
     const navigate = useNavigate()
-    const params = useParams()
-    const code = params.id
+    const location = useLocation();
+    const game = location.state?.game;
+    const code = game.code
     const gameLaunchContainerRef = useRef<HTMLDivElement>(null)
-    console.log("gameLaunchContainerRef", gameLaunchContainerRef.current)
 
     const launchGame = () => {
         if (code && gameLaunchContainerRef.current) {
             if (window.comeon && window.comeon.game && typeof window.comeon.game.launch === "function") {
-                console.log("second", gameLaunchContainerRef, window)
                 gameLaunchContainerRef.current.innerHTML = ''
                 window.comeon.game.launch(code)
             } else {
@@ -22,12 +21,27 @@ const Game = () => {
     }
 
     useEffect(() => {
-        // launchGame()
+        launchGame()
     }, [code])
 
     return (
-        <div>
-            <div className="flex justify-start w-screen px-4">
+        <>
+            <div className="text-center">
+                <h1 className="text-3xl font-bold mt-2">{game.name ?? ""}</h1>
+            </div>
+            <div
+                id="game-launch"
+                ref={gameLaunchContainerRef}
+                className="gameWindow"
+            />
+            {game.description && (
+                <div className="mb-4">
+                    <p className="leading-4">
+                        {game.description}
+                    </p>
+                </div>
+            )}
+            <div className="flex justify-center items-center mb-4">
                 <Button
                     variant="outlined"
                     color="primary"
@@ -35,19 +49,8 @@ const Game = () => {
                 >
                     Back
                 </Button>
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    onClick={launchGame}>
-                    Play
-                </Button>
             </div>
-            <div
-                id="game-launch"
-                ref={gameLaunchContainerRef}
-                className="gameWindow"
-            />
-        </div>
+        </>
     )
 }
 

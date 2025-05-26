@@ -19,7 +19,7 @@ const Gallery = ({ games, loading }: GalleryProps) => {
             }
             {
                 !loading && games.length > 0 &&
-                <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 mb-4">
                     {games.map((game, index) => {
                         return (
                             <Card key={index} game={game} />

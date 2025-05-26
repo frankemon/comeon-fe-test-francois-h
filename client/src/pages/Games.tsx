@@ -9,7 +9,6 @@ const Games = () => {
     // Centralized state management for games, search term, and selected category
     const { games, setGames, selectedCategory, setSelectedCategory, searchTerm } = useGames()
 
-
     const getGames = async () => {
         setLoading(true)
         const response = await fetchGames()

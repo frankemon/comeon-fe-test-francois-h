@@ -1,4 +1,4 @@
-import { Button, Card, CardContent } from '@mui/material'
+import { Button, Card, CardContent, useMediaQuery, useTheme } from '@mui/material'
 import { Game } from '../../types/Game'
 import { useNavigate } from "react-router-dom"
 
@@ -6,28 +6,38 @@ interface GameCardProps {
     game: Game
 }
 
-// TODO: img same height on all cards, add mouseover effect: add overlay, show button, zoom image, shift card up
 const GameCard = (args: GameCardProps) => {
     const { game } = args
     const navigate = useNavigate()
+    const theme = useTheme()
+    const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
-    const pushToGame = (code: string) => {
-        navigate(`/games/${game.code}`)
+    // Push user to game page with game object in state
+    // This gives access to game data without needing to fetch
+    const pushToGame = (game: Game) => {
+        navigate(`/games/${game.code}`, { state: { game } })
     }
 
     return (
         <Card>
-            <CardContent className='flex justify-between gap-4'>
-                <div className='w-[100px]'>
+            <CardContent className='flex justify-between items-center gap-4'>
+                <div className='min-w-[50px] max-w-[330px]'>
                     <img src={game.icon} alt={game.name} title={game.name} />
                 </div>
                 <div>
-                    <p>{game.name}</p>
-                    {/* <p>{game.description}</p> */}
+                    <p className='font-bold'>{game.name}</p>
+                    {
+                        !smallScreen && game.description && (
+                            <p className='text-sm text-gray-600'>{game.description}</p>
+                        )
+                    }
+                    {smallScreen && game.description && (
+                        <p className='text-sm text-gray-600 line-clamp-1 text-ellipsis'>{game.description}</p>
+                    )}
                 </div>
                 <div className='flex items-center justify-center'>
                     <Button
-                        onClick={() => pushToGame(game.code)}
+                        onClick={() => pushToGame(game)}
                         variant="contained"
                         color="success">
                         Play

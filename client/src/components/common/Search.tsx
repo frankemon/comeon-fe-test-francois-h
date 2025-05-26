@@ -1,10 +1,14 @@
 import { InputBase } from "@mui/material"
-// import SearchIcon from '@material-ui/icons/Search';
-import useSearch from "../../hooks/useSearch"
+// import useSearch from "../../hooks/useSearch"
+import { useGames } from "../../context/Games"
 
 const Search = () => {
+    // Switch to useGames context for search instead of a 
+    // custom hook because data needed in multiple components
+    const { setSearchTerm } = useGames()
     return (
         <InputBase
+            onChange={(event) => setSearchTerm(event.target.value)}
             placeholder="Search games..."
             className="bg-white rounded px-4 py-1 w-64"
             inputProps={{ "aria-label": "search games" }}

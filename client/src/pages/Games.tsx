@@ -1,16 +1,14 @@
 import Gallery from '../components/GameGallery/Gallery'
 import Categories from '../components/Categories/Categories'
-import { Game } from '../types/Game'
 import { useEffect, useState } from 'react'
 import { get as fetchGames } from '../services/games'
-import useFilter from '../hooks/useFilter'
+import { useGames } from '../context/Games'
 
 const Games = () => {
     const [loading, setLoading] = useState<boolean>(true)
-    const [games, setGames] = useState<Game[]>([])
+    // Centralized state management for games, search term, and selected category
+    const { games, setGames, selectedCategory, setSelectedCategory, searchTerm } = useGames()
 
-    const { selectedCategory, setSelectedCategory, filteredGames } = useFilter(games)
-    console.log("games tsx filteredGames:", filteredGames)
 
     const getGames = async () => {
         setLoading(true)
@@ -21,6 +19,19 @@ const Games = () => {
         }
         setLoading(false)
     }
+
+    // Filter by category
+    const gamesByCategory =
+        selectedCategory === 0 || selectedCategory === null
+            ? games
+            : games.filter(game => game.categoryIds.includes(selectedCategory));
+
+    // Filter by search term
+    const gamesBySearch = !searchTerm
+        ? gamesByCategory
+        : gamesByCategory.filter(game =>
+            game.name.toLowerCase().includes(searchTerm.toLowerCase())
+        );
 
     useEffect(() => {
         getGames()
@@ -33,7 +44,7 @@ const Games = () => {
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
-                <Gallery games={filteredGames} loading={loading} />
+                <Gallery games={gamesBySearch} loading={loading} />
             </div>
         </>
     )

@@ -1,9 +1,9 @@
-import React from 'react'
+import { ReactNode } from 'react'
 import Navbar from './Navbar'
 import { Container, Toolbar } from '@mui/material'
 
 interface LayoutProps {
-    children: React.ReactNode
+    children: ReactNode
 }
 
 const Layout = ({ children }: LayoutProps) => {

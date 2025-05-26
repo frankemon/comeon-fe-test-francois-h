@@ -1,8 +1,17 @@
-import Login from '../components/auth/Login'
-// TODO: breakout to page and Component, text in page, form in component
+import { Card, CardContent } from '@mui/material'
+import LoginForm from '../components/auth/LoginForm'
+
 const Auth = () => {
     return (
-        <Login />
+        <Card>
+            <CardContent className="flex flex-col gap-4">
+                <div className="text-center">
+                    <h1>Welcome Back</h1>
+                    <p>Login to access your casino account and start winning</p>
+                </div>
+                <LoginForm />
+            </CardContent>
+        </Card>
     )
 }
 

@@ -1,8 +1,6 @@
 import Login from '../components/auth/Login'
-
-type Props = {}
-
-const Auth = (props: Props) => {
+// TODO: breakout to page and Component, text in page, form in component
+const Auth = () => {
     return (
         <Login />
     )

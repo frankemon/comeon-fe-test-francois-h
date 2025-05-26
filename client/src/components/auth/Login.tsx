@@ -2,13 +2,14 @@ import { Button, Card, CardContent, TextField } from "@mui/material"
 import { login as loginService } from "../../services/auth"
 import { useAuth } from "../../context/Auth"
 import { useNavigate } from "react-router-dom"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 const Login = () => {
     const { login } = useAuth()
     const navigate = useNavigate()
     const usernameRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
+    const [error, setError] = useState<string>("")
 
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
@@ -23,8 +24,9 @@ const Login = () => {
             const player = { ...response?.player, username }
             login(player)
             navigate("/games")
-        } catch (error) {
+        } catch (error: any) {
             console.error("Login error:", error)
+            setError(error.message)
         }
     }
 
@@ -52,6 +54,13 @@ const Login = () => {
                         <Button variant="contained" color="primary" type="submit">
                             Login
                         </Button>
+                    </div>
+                    <div>
+                        {error && (
+                            <p className="text-red-500 text-center">
+                                {error}
+                            </p>
+                        )}
                     </div>
                 </form>
             </CardContent>

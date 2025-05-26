@@ -22,7 +22,7 @@ export const login = async (username: string, password: string) => {
         return data
     } catch (error) {
         console.error("Login error:", error)
-        throw new Error("Login failed")
+        throw new Error("Login failed. Please try again.")
     }
 }
 

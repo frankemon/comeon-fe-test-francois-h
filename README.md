@@ -44,9 +44,7 @@ npm install json-server@0.17.3
 ```
 npm run dev
 ```
-### 4. Run mock backend in new terminal from client folder
-```
-cd server
-npx json-server --watch mock/mock-data.json --middlewares mock/mock-api.js --port 3001
-```
+### 4. ~~Run mock backend in new terminal from client folder~~
+This no longer works because of submodules. I tried to fix but couldn't.
+
 

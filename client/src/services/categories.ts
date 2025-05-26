@@ -1,12 +1,13 @@
-// TODO: add type for these
-export const get = async () => {
+import { Category } from "../types/Category";
+
+export const get = async (): Promise<Category[]> => {
     try {
         const response = await fetch("http://localhost:3001/categories");
         if (!response.ok) {
             throw new Error("Failed to fetch games");
         }
 
-        const data = await response.json()
+        const data: Category[] = await response.json()
         return data
 
     } catch (error) {

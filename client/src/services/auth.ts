@@ -1,4 +1,6 @@
-export const login = async (username: string, password: string) => {
+import { LoginResponse } from "../types/Auth"
+
+export const login = async (username: string, password: string): Promise<LoginResponse> => {
     if (!username || !password) {
         throw new Error("Username and password required.")
     }
@@ -17,7 +19,7 @@ export const login = async (username: string, password: string) => {
             throw new Error("Login failed")
         }
 
-        const data = await response.json()
+        const data: LoginResponse = await response.json()
 
         return data
     } catch (error) {
@@ -26,7 +28,8 @@ export const login = async (username: string, password: string) => {
     }
 }
 
-export const logout = async (username: string) => {
+// No data returned except status, so Promise<void>
+export const logout = async (username: string): Promise<void> => {
     if (!username) {
         throw new Error("Username required.")
     }

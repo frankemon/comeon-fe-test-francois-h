@@ -48,6 +48,6 @@ npm run dev
 ```
 npx json-server --watch mock/mock-data.json --middlewares mock/mock-api.js --port 3001
 ```
-This no longer works because of server folder being treated as submodule. Tried multiple times to fix it removing cache, .git hidden folders and repushing but nothing worked.
+Using this approach because of submodule issues from earlier.
 
 

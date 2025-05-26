@@ -39,11 +39,12 @@ const Games = () => {
 
     return (
         <>
-            <div className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-4 items-center mt-2 lg:mt-0'>
                 <Categories
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
+
                 <Gallery games={gamesBySearch} loading={loading} />
             </div>
         </>

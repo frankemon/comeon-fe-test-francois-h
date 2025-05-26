@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { get as fetchCategories } from '../../services/categories'
 import { Category } from '../../types/Category'
-import { ButtonGroup } from '@mui/material'
+import { ButtonGroup, useMediaQuery, useTheme } from '@mui/material'
 import Button from '@mui/material/Button'
 
 interface CategoriesProps {
@@ -11,6 +11,8 @@ interface CategoriesProps {
 
 const Categories = ({ selectedCategory, setSelectedCategory }: CategoriesProps) => {
     const [categories, setCategories] = useState<Category[]>([])
+    const theme = useTheme()
+    const smallScreen = useMediaQuery(theme.breakpoints.down('sm'))
 
     const getCategories = async () => {
         const response = await fetchCategories()
@@ -25,11 +27,11 @@ const Categories = ({ selectedCategory, setSelectedCategory }: CategoriesProps) 
     }, [])
 
     return (
-        <div>
-            {categories.length === 0 && <p>No categories found</p>}
+        <div className='flex justify-center items-center'>
+            {categories.length === 0 && <p className='text-center'>No categories found</p>}
             {categories.length > 0 &&
                 <ButtonGroup
-                    size='large'
+                    size={smallScreen ? "medium" : "large"}
                     variant="outlined"
                     aria-label="outlined button group"
                 >

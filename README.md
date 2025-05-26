@@ -1,5 +1,3 @@
-Markdown
-
 # ComeOn Group Frontend Code Test
 
 ## Casino Web Application
